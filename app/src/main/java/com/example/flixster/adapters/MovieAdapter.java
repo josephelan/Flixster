@@ -84,7 +84,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
       tv_date.setText(String.format("Release date: %s", movie.getRelease_date_()));
       String imageUrl;
 
-      // Change image based on portrait vs landscape mode
+      // Change image based on portrait vs landscape mode and whether or not rating is above 7
       if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
         imageUrl = movie.getBackdrop_path_();
       } else {
@@ -92,7 +92,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
       }
 
       // load image
-      Glide.with(context).load(imageUrl).into(image_view_poster);
+      Glide.with(context)
+          .load(imageUrl)
+          .placeholder(R.drawable.ic_launcher_background)
+          .into(image_view_poster);
     }
   }
 }
