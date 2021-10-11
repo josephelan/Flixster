@@ -1,18 +1,23 @@
 package com.example.flixster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.LinearLayout;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.example.flixster.adapters.MovieAdapter;
 import com.example.flixster.models.Movie;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Headers;
@@ -33,6 +38,21 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    // Create Recyclerview
+    RecyclerView rv_movies = findViewById(R.id.rv_movies);
+
+    // Initialize movies until JSON returns movies
+    movies = new ArrayList<>();
+
+    // Create the adapter
+    MovieAdapter movieAdapter = new MovieAdapter(this, movies);
+
+    // Set adapter on the RecyclerView
+    rv_movies.setAdapter(movieAdapter);
+
+    // Set a layout Manager on the RecyclerView
+    rv_movies.setLayoutManager(new LinearLayoutManager(this));
+
     // Json handling Asynchronous client
     AsyncHttpClient client = new AsyncHttpClient();
     client.get(NOW_PLAYING_URL, new JsonHttpResponseHandler() {
@@ -49,7 +69,11 @@ public class MainActivity extends AppCompatActivity {
           Log.i(TAG, "Results: " + results.toString()); // show JSON results
 
           // initialize movies from movies generated from json array
-          movies = Movie.fromJsonArray(results);
+          movies.addAll(Movie.fromJsonArray(results));
+
+          // Re render when movies change
+          movieAdapter.notifyDataSetChanged();
+
           Log.i(TAG,"Movies size: " + movies.size());
         } catch (JSONException e) {
           Log.e(TAG, "Json results creation exception");

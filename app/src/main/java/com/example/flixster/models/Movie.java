@@ -51,10 +51,46 @@ public class Movie {
   }
 
   public String getRelease_date_() {
-    return release_date_;
+    String[] date = release_date_.split("-");
+    String month = monthHelper(date[1]);
+    return month + " " + date[2] + " " + date[0];
   }
 
-  public double getRating_() {
+  public Double getRating_() {
     return rating_;
+  }
+
+  /**
+   * Convert int to month
+   * @param month
+   * @return month as a string
+   */
+  private String monthHelper(String month) {
+    switch (month) {
+      case "1":
+        return "January";
+      case "2":
+        return "February";
+      case "3":
+        return "March";
+      case "4":
+        return "April";
+      case "5":
+        return "May";
+      case "6":
+        return "June";
+      case "7":
+        return "July";
+      case "8":
+        return "August";
+      case "9":
+        return "September";
+      case "10":
+        return "October";
+      case "11":
+        return "November";
+      default:
+        return "December";
+    }
   }
 }
