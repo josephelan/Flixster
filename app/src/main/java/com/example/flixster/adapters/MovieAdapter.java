@@ -1,6 +1,7 @@
 package com.example.flixster.adapters;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,6 +65,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     TextView tv_date;
     ImageView image_view_poster;
 
+    // construct viewholder
     public ViewHolder(@NonNull View itemView) {
       super(itemView);
 
@@ -74,12 +76,23 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
       image_view_poster = itemView.findViewById(R.id.image_view_poster);
     }
 
+    // bind movie to viewholder
     public void bind(Movie movie) {
       tv_title.setText(movie.getTitle_());
       tv_overview.setText(movie.getOverview_());
-      tv_rating.setText("Rating: " + (movie.getRating_()));
-      tv_date.setText("Release date: " + movie.getRelease_date_());
-      Glide.with(context).load(movie.getPoster_path_()).into(image_view_poster);
+      tv_rating.setText(String.format("Rating: %s", movie.getRating_()));
+      tv_date.setText(String.format("Release date: %s", movie.getRelease_date_()));
+      String imageUrl;
+
+      // Change image based on portrait vs landscape mode
+      if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        imageUrl = movie.getBackdrop_path_();
+      } else {
+        imageUrl = movie.getPoster_path_();
+      }
+
+      // load image
+      Glide.with(context).load(imageUrl).into(image_view_poster);
     }
   }
 }
