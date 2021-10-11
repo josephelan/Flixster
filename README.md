@@ -20,7 +20,7 @@ I also added a rating and release date for each movie with coloring.
 
 ### App Walkthough GIF
 
-<img src="" width=1500><br>
+<img src="Flixster_gif.gif" width=1500><br>
 
 ### Notes
 This application development went pretty smoothly. The most difficult part was figuring out how to create properly size images to show up properly.
