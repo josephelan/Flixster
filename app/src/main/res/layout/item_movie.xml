@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentStart="true"
     android:layout_alignParentTop="true"
@@ -14,8 +14,8 @@
 
     <ImageView
         android:id="@+id/image_view_poster"
-        android:layout_width="110dp"
-        android:layout_height="184dp"
+        android:layout_width="120dp"
+        android:layout_height="180dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
@@ -27,23 +27,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/image_view_poster"
         android:text="TextView"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="23sp"
         tools:text="Shang-Chi and the Legend of the Ten Rings" />
 
     <TextView
         android:id="@+id/movie_overview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/movie_rating"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="1dp"
+        android:layout_below="@+id/movie_release_date"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/image_view_poster"
-        android:text="TextView"
         android:textColor="#6DFFFFFF"
-        android:textSize="13sp"
+        android:textSize="12sp"
         tools:text="Shang-Chi must confront the past he thought he left behind when he is drawn into the web of the mysterious Ten Rings organization." />
 
     <TextView
@@ -55,7 +55,7 @@
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/image_view_poster"
         android:textColor="#673AB7"
-        android:textSize="12sp"
+        android:textSize="11sp"
         tools:text="Rating" />
 
     <TextView
@@ -63,11 +63,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/movie_title"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/movie_rating"
         android:text="TextView"
         android:textColor="#FF9800"
-        android:textSize="12sp"
+        android:textSize="11sp"
         tools:text="Release Date" />
 </RelativeLayout>
