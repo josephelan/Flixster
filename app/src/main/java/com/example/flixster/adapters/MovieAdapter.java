@@ -2,12 +2,15 @@ package com.example.flixster.adapters;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +31,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     this.movies = movies;
   }
 
-  // Usually involves inflacting a layout from XML and returning the holder
+  // Usually involves inflating a layout from XML and returning the holder
   @NonNull
   @Override
   public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -59,6 +62,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
   // inner viewholder class extends recyclerview viewholder
   public class ViewHolder extends RecyclerView.ViewHolder{
 
+    RelativeLayout container;
     TextView tv_title;
     TextView tv_overview;
     TextView tv_rating;
@@ -69,6 +73,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public ViewHolder(@NonNull View itemView) {
       super(itemView);
 
+      // Assign viewholder information to current movie data
       tv_title = itemView.findViewById(R.id.movie_title);
       tv_overview = itemView.findViewById(R.id.movie_overview);
       tv_rating = itemView.findViewById(R.id.movie_rating);
@@ -76,26 +81,43 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
       image_view_poster = itemView.findViewById(R.id.image_view_poster);
     }
 
-    // bind movie to viewholder
+    // bind movie to Viewholder
     public void bind(Movie movie) {
-      tv_title.setText(movie.getTitle_());
-      tv_overview.setText(movie.getOverview_());
-      tv_rating.setText(String.format("Rating: %s", movie.getRating_()));
-      tv_date.setText(String.format("Release date: %s", movie.getRelease_date_()));
+
+      // Set screen text to movie data members
+      tv_title.setText(movie.getTitle());
+      tv_overview.setText(movie.getOverview());
+      tv_rating.setText(String.format("Rating: %s", movie.getRating()));
+      tv_date.setText(String.format("Release date: %s", movie.getRelease_date()));
+      if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        container = itemView.findViewById(R.id.container_landscape);
+      } else {
+        container = itemView.findViewById(R.id.container_portrait);
+      }
       String imageUrl;
 
-      // Change image based on portrait vs landscape mode and whether or not rating is above 7
+      // Change image based on portrait vs landscape mode
       if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-        imageUrl = movie.getBackdrop_path_();
+        imageUrl = movie.getBackdrop_path();
       } else {
-        imageUrl = movie.getPoster_path_();
+        imageUrl = movie.getPoster_path();
       }
 
-      // load image
+      // load image into poster position, include loading image
       Glide.with(context)
           .load(imageUrl)
           .placeholder(R.drawable.ic_launcher_background)
           .into(image_view_poster);
+
+      // 1. Register click listener on whole movie row
+      container.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+          // 2. Navigate to a new activity on click (tap)
+          Toast.makeText(context, movie.getTitle(), Toast.LENGTH_SHORT).show();
+        }
+      });
     }
   }
 }

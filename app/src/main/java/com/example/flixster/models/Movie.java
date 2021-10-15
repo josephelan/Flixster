@@ -40,29 +40,29 @@ public class Movie {
     rating_ = json_object.getDouble("vote_average");
   }
 
-  public String getPoster_path_() {
+  public String getPoster_path() {
     return String.format("http://image.tmdb.org/t/p/w342/%s", poster_path_);
   }
 
-  public String getBackdrop_path_() {
+  public String getBackdrop_path() {
     return String.format("http://image.tmdb.org/t/p/w342/%s", backdrop_path_);
   }
 
-  public String getTitle_() {
+  public String getTitle() {
     return title_;
   }
 
-  public String getOverview_() {
+  public String getOverview() {
     return overview_;
   }
 
-  public String getRelease_date_() {
+  public String getRelease_date() {
     String[] date = release_date_.split("-");
     String month = monthHelper(date[1]);
     return month + " " + date[2] + " " + date[0];
   }
 
-  public Double getRating_() {
+  public Double getRating() {
     return rating_;
   }
 
