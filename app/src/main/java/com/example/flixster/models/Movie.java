@@ -5,18 +5,24 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Parcel
 public class Movie {
 
-  private String poster_path_;
-  private String backdrop_path_;
-  private String title_;
-  private String overview_;
-  private String release_date_;
-  private double rating_;
+  String poster_path_;
+  String backdrop_path_;
+  String title_;
+  String overview_;
+  String release_date_;
+  double rating_;
+  int movie_id;
+
+  // Empty constructor for Parceler library
+  public Movie() {}
 
   // Creates list of movies in from JSON array
   public static List<Movie> fromJsonArray(JSONArray movie_json_array) throws JSONException {
@@ -38,10 +44,15 @@ public class Movie {
     overview_ = json_object.getString("overview");
     release_date_ = json_object.getString("release_date");
     rating_ = json_object.getDouble("vote_average");
+    movie_id = json_object.getInt("id");
   }
 
   public String getPoster_path() {
     return String.format("http://image.tmdb.org/t/p/w342/%s", poster_path_);
+  }
+
+  public int getMovie_id() {
+    return movie_id;
   }
 
   public String getBackdrop_path() {
