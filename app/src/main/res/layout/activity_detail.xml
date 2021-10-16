@@ -49,4 +49,12 @@
         android:text="TextView"
         android:textColor="#FBF7F7"
         tools:text="Here is an example of a movie overview. Here is an example of a movie overview. Here is an example of a movie overview. Here is an example of a movie overview. Here is an example of a movie overview. Here is an example of a movie overview." />
+
+    <ImageView
+        android:id="@+id/ivProfile"
+        android:transitionName="profile"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="380dp" />
+
 </LinearLayout>
