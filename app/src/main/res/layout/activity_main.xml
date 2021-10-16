@@ -8,6 +8,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/ivProfile"
+        android:transitionName="profile"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="160dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_movies"

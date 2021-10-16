@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,8 @@ import com.example.flixster.models.Movie;
 import org.parceler.Parcels;
 
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
@@ -108,8 +111,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
       }
 
       // load image into poster position, include loading image
+      int radius = 30;
+      int margin = 5;
       Glide.with(context)
           .load(imageUrl)
+          .centerCrop()
+          .transform(new RoundedCornersTransformation(radius, margin))
           .placeholder(R.drawable.ic_launcher_background)
           .into(image_view_poster);
 
